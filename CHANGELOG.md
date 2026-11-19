@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-19
+
 ### Added
 
 - Luchtmeetnet stations, the official Dutch air quality network (RIVM, DCMR,
@@ -26,4 +28,5 @@ the notes of the version's GitHub Release.
 - Texts in English, French, German and Spanish; documentation in these four
   languages and in Dutch.
 
-[Unreleased]: https://github.com/guim31/gladys-luchtmeetnet/commits/main
+[Unreleased]: https://github.com/guim31/gladys-luchtmeetnet/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/guim31/gladys-luchtmeetnet/releases/tag/v1.0.0
