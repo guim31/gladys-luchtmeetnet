@@ -1,0 +1,37 @@
+{
+  "pagination": {
+    "last_page": 5,
+    "first_page": 1,
+    "prev_page": 2,
+    "current_page": 3,
+    "page_list": [1, 2, 3, 4, 5],
+    "next_page": 4
+  },
+  "data": [
+    { "number": "NL10742", "location": "Nijmegen-Ruyterstraat" },
+    { "number": "NL10741", "location": "Nijmegen-Graafseweg" },
+    { "number": "NL10738", "location": "Wekerom-Riemterdijk" },
+    { "number": "NL10722", "location": "Eibergen-Lintveldseweg" },
+    { "number": "NL10644", "location": "Cabauw-Wielsekade" },
+    { "number": "NL10643", "location": "Utrecht-Griftpark" },
+    { "number": "NL10641", "location": "Breukelen-A2" },
+    { "number": "NL10639", "location": "Utrecht-Constant Erzeijstraat" },
+    { "number": "NL10636", "location": "Utrecht-Kardinaal de Jongweg" },
+    { "number": "NL10633", "location": "Zegveld-Oude Meije" },
+    { "number": "NL10617", "location": "Biddinghuizen-Kuilweg" },
+    { "number": "NL10552", "location": "Haarlem-Freddie Oversteegenstraat " },
+    { "number": "NL10538", "location": "Wieringerwerf-Medemblikkerweg" },
+    { "number": "NL10451", "location": "Rotterdam-Blankenburgstraat" },
+    { "number": "NL10450", "location": "Den Haag-Neherkade" },
+    { "number": "NL10449", "location": "Vlaardingen-Riouwlaan" },
+    { "number": "NL10446", "location": "Den Haag-Bleriotlaan" },
+    { "number": "NL10445", "location": "Den Haag-Amsterdamse Veerkade" },
+    { "number": "NL10444", "location": "De Zilk-Vogelaarsdreef" },
+    { "number": "NL10442", "location": "Dordrecht-Bamendaweg" },
+    { "number": "NL10437", "location": "Westmaas-Groeneweg" },
+    { "number": "NL10418", "location": "Rotterdam-Schiedamsevest" },
+    { "number": "NL10404", "location": "Den Haag-Rebecquestraat" },
+    { "number": "NL10320", "location": "Burgh-Haamstede" },
+    { "number": "NL10318", "location": "Philippine-Stelleweg" }
+  ]
+}

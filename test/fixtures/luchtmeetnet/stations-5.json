@@ -1,0 +1,15 @@
+{
+  "pagination": {
+    "last_page": 5,
+    "first_page": 1,
+    "prev_page": 4,
+    "current_page": 5,
+    "page_list": [1, 2, 3, 4, 5],
+    "next_page": 5
+  },
+  "data": [
+    { "number": "NL01487", "location": "Rotterdam-Pleinweg" },
+    { "number": "NL01485", "location": "Rotterdam-Hoogvliet" },
+    { "number": "NL01484", "location": "Rotterdam-Geulhaven" }
+  ]
+}

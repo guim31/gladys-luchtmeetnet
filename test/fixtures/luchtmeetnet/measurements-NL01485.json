@@ -1,0 +1,204 @@
+{
+  "pagination": {
+    "last_page": 1,
+    "first_page": 1,
+    "prev_page": 1,
+    "current_page": 1,
+    "page_list": [1],
+    "next_page": 1
+  },
+  "data": [
+    {
+      "station_number": "NL01485",
+      "value": 1.0,
+      "timestamp_measured": "2026-11-19T20:00:00+00:00",
+      "formula": "SO2",
+      "timestamp_measured_start": "2026-11-19T19:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T20:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 0.4,
+      "timestamp_measured": "2026-11-19T20:00:00+00:00",
+      "formula": "NO",
+      "timestamp_measured_start": "2026-11-19T19:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T20:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 2.9,
+      "timestamp_measured": "2026-11-19T20:00:00+00:00",
+      "formula": "PM25",
+      "timestamp_measured_start": "2026-11-19T19:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T20:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 16.7,
+      "timestamp_measured": "2026-11-19T20:00:00+00:00",
+      "formula": "NO2",
+      "timestamp_measured_start": "2026-11-19T19:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T20:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 48.9,
+      "timestamp_measured": "2026-11-19T20:00:00+00:00",
+      "formula": "O3",
+      "timestamp_measured_start": "2026-11-19T19:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T20:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 8.9,
+      "timestamp_measured": "2026-11-19T20:00:00+00:00",
+      "formula": "PM10",
+      "timestamp_measured_start": "2026-11-19T19:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T20:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 0.82,
+      "timestamp_measured": "2026-11-19T20:00:00+00:00",
+      "formula": "C7H8",
+      "timestamp_measured_start": "2026-11-19T19:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T20:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 0.26,
+      "timestamp_measured": "2026-11-19T20:00:00+00:00",
+      "formula": "C6H6",
+      "timestamp_measured_start": "2026-11-19T19:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T20:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 16.9,
+      "timestamp_measured": "2026-11-19T19:00:00+00:00",
+      "formula": "NO2",
+      "timestamp_measured_start": "2026-11-19T18:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T19:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 8.7,
+      "timestamp_measured": "2026-11-19T19:00:00+00:00",
+      "formula": "PM10",
+      "timestamp_measured_start": "2026-11-19T18:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T19:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 0.6,
+      "timestamp_measured": "2026-11-19T19:00:00+00:00",
+      "formula": "NO",
+      "timestamp_measured_start": "2026-11-19T18:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T19:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 3.4,
+      "timestamp_measured": "2026-11-19T19:00:00+00:00",
+      "formula": "PM25",
+      "timestamp_measured_start": "2026-11-19T18:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T19:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 1.1,
+      "timestamp_measured": "2026-11-19T19:00:00+00:00",
+      "formula": "SO2",
+      "timestamp_measured_start": "2026-11-19T18:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T19:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 0.22,
+      "timestamp_measured": "2026-11-19T19:00:00+00:00",
+      "formula": "C6H6",
+      "timestamp_measured_start": "2026-11-19T18:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T19:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 0.61,
+      "timestamp_measured": "2026-11-19T19:00:00+00:00",
+      "formula": "C7H8",
+      "timestamp_measured_start": "2026-11-19T18:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T19:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 51.4,
+      "timestamp_measured": "2026-11-19T19:00:00+00:00",
+      "formula": "O3",
+      "timestamp_measured_start": "2026-11-19T18:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T19:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 0.99,
+      "timestamp_measured": "2026-11-19T18:00:00+00:00",
+      "formula": "C7H8",
+      "timestamp_measured_start": "2026-11-19T17:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T18:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 1.5,
+      "timestamp_measured": "2026-11-19T18:00:00+00:00",
+      "formula": "NO",
+      "timestamp_measured_start": "2026-11-19T17:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T18:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 49.3,
+      "timestamp_measured": "2026-11-19T18:00:00+00:00",
+      "formula": "O3",
+      "timestamp_measured_start": "2026-11-19T17:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T18:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 21.0,
+      "timestamp_measured": "2026-11-19T18:00:00+00:00",
+      "formula": "NO2",
+      "timestamp_measured_start": "2026-11-19T17:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T18:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 2.4,
+      "timestamp_measured": "2026-11-19T18:00:00+00:00",
+      "formula": "PM25",
+      "timestamp_measured_start": "2026-11-19T17:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T18:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 7.7,
+      "timestamp_measured": "2026-11-19T18:00:00+00:00",
+      "formula": "PM10",
+      "timestamp_measured_start": "2026-11-19T17:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T18:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 0.28,
+      "timestamp_measured": "2026-11-19T18:00:00+00:00",
+      "formula": "C6H6",
+      "timestamp_measured_start": "2026-11-19T17:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T18:00:00+00:00"
+    },
+    {
+      "station_number": "NL01485",
+      "value": 1.0,
+      "timestamp_measured": "2026-11-19T18:00:00+00:00",
+      "formula": "SO2",
+      "timestamp_measured_start": "2026-11-19T17:00:00+00:00",
+      "timestamp_measured_end": "2026-11-19T18:00:00+00:00"
+    }
+  ]
+}
