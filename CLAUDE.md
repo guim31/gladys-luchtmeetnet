@@ -32,15 +32,23 @@ pushing.
 
 ```
 index.js                          SDK wiring only: handlers registered before connect()
-src/devices/index.js              registry of the device blueprints + dispatch helpers
-src/devices/<type>.js             one device type per file (buildDevice, onPoll, onSetValue...)
-src/scenes.js                     scene action handlers (manifest `scene_actions`)
-src/widgets.js                    dashboard widget handlers (manifest `widgets`)
+src/app.js                        every handler, wired on a Gladys client (real or fake)
+src/api.js                        the Luchtmeetnet API, its field names, the rate limiter
+src/catalog.js                    the station list (live names + bundled coordinates), search
+src/stations.json                 station numbers, names and coordinates, recorded from the API
+src/hub.js                        records of the stations, reads, states, scene triggers
+src/poller.js                     the container's own timer (should_poll: false)
+src/devices.js                    one device per station (buildDevice, feature keys)
+src/actions.js                    Configuration buttons (find a station, check the stations)
+src/scenes.js                     scene action handler (manifest `scene_actions`)
+src/widgets.js                    dashboard widget handler (manifest `widgets`)
+src/i18n.js                       every produced text, in en/fr/de/es
 src/config.js                     DEFAULT_CONFIG (mirrors the manifest defaults) + normalization
-src/weather.js                    example driver (Open-Meteo)
+src/store.js, src/issues.js       /data persistence, failures logged once
 gladys-assistant-integration.json manifest: name, config_schema, actions, image...
-docs/en.md, docs/fr.md            user documentation, re-hosted by Gladys (mandatory)
+docs/{en,fr,de,es}.md             user documentation, re-hosted by Gladys (docs/nl.md: GitHub only)
 test/                             node --test, against the SDK's fake Gladys (integration-sdk/testing)
+test/fixtures/luchtmeetnet/       real answers recorded on 2026-11-19 (NL49014, NL10938, NL01485)
 .github/scripts/release.mjs       release helpers (manifest bump, changelog), tested in test/
 ```
 
@@ -259,3 +267,29 @@ long, et sur un « Sie »/« Ihr… » de politesse en allemand. Le store exige 
 - Docs `en`, `fr`, `de`, `es` avec les mêmes sections.
 - Chauffe, ouverture, sécurité : ne rien rendre pilotable « comme un thermostat » ou par un assistant
   vocal quand une erreur serait dangereuse (leçon d'OctoPrint).
+
+## Luchtmeetnet (cette intégration)
+
+- **API** `https://api.luchtmeetnet.nl/open_api` (doc Postman : `api-docs.luchtmeetnet.nl`), ouverte,
+  sans clé, **100 requêtes par 5 minutes** : `src/api.js` passe tout par un limiteur à fenêtre glissante
+  (90 / 5 min) et suspend une minute après un 429. Pages de taille variable (au moins 64 éléments),
+  `pagination.last_page` suivi ; une page au-delà de la dernière répond `last_page: 0` et `data: []`.
+- **`/measurements` et `/lki` sans `start`/`end`** répondent un **302** vers `iq.luchtmeetnet.nl` avec
+  une fenêtre de 7 jours : toujours donner la fenêtre (3 h pour les mesures, 6 h pour le LKI, format
+  `2026-11-19T20:20:00Z` sans millisecondes). `timestamp_measured` est la **fin** de l'heure, en ISO
+  avec décalage.
+- `/stations` (liste) ne donne que `number` et `location` (103 stations le 19/11/2026, 5 pages) ; les
+  coordonnées exigent `/stations/{n}`, une requête par station. Elles sont donc **embarquées** dans
+  `src/stations.json`, régénéré à la main (lire les 5 pages puis chaque fiche, une requête toutes les
+  3,2 s) ; une station lue ajoute les siennes. Numéro inconnu : **404** `{"reason":"not_found"}`.
+- La **fiche d'une station** (`components`) est parfois incomplète (Groningen-Nijensteinheerd mesure
+  PM10 sans le lister) : les composants s'apprennent aussi des mesures, et ne sont jamais retirés.
+- Mesures : petites valeurs **négatives** (NO −0,18, bruit d'appareil) publiées à 0. Ignorés : NOx, FN,
+  BCWB (suie), PS (particules ultrafines, en nombre), C7H8, C8H10, C10H8, H2S.
+- **LKI** 1 à 11, tranches officielles 1-3 Goed, 4-6 Matig, 7-8 Onvoldoende, 9-10 Slecht, 11 Zeer slecht.
+  Seul le LKI global (`formula: LKI`) est exposé par l'API : pas de polluant « responsable ».
+- **Déclencheurs à seuil** : les filtres de scène ne font qu'égalité, donc **un événement par seuil
+  franchi vers le haut** (`threshold` en chaîne, comparé au `select` du manifeste) : LKI 5 → 8 émet 6, 7
+  et 8. Référence = heure précédente du même composant si elle date de 3 h au plus (sinon rien) ; `seen`
+  et `announced` sont gardés sous `/data` : un redémarrage ne réémet pas la même heure.
+- Pas de matériel : tout est testable contre l'API réelle, d'où les fixtures enregistrées.

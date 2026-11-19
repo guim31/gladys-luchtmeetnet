@@ -1,0 +1,723 @@
+[
+  {
+    "id": "NL01484",
+    "name": "Rotterdam-Geulhaven",
+    "municipality": "Rotterdam",
+    "lat": 51.889,
+    "lon": 4.3125
+  },
+  {
+    "id": "NL01485",
+    "name": "Rotterdam-Hoogvliet",
+    "municipality": "Rotterdam",
+    "lat": 51.86742,
+    "lon": 4.35524
+  },
+  {
+    "id": "NL01487",
+    "name": "Rotterdam-Pleinweg",
+    "municipality": "Rotterdam",
+    "lat": 51.89113,
+    "lon": 4.48066
+  },
+  {
+    "id": "NL01488",
+    "name": "Rotterdam-Zwartewaalstraat",
+    "municipality": "Rotterdam",
+    "lat": 51.89361,
+    "lon": 4.48759
+  },
+  {
+    "id": "NL01489",
+    "name": "Ridderkerk-A16",
+    "municipality": "Ridderkerk",
+    "lat": 51.86942,
+    "lon": 4.58007
+  },
+  {
+    "id": "NL01491",
+    "name": "Overschie-A13",
+    "municipality": "Rotterdam",
+    "lat": 51.93858,
+    "lon": 4.4307
+  },
+  {
+    "id": "NL01493",
+    "name": "Rotterdam-Statenweg",
+    "municipality": "Rotterdam",
+    "lat": 51.92711,
+    "lon": 4.46136
+  },
+  {
+    "id": "NL01494",
+    "name": "Schiedam-A.Arienstraat",
+    "municipality": "Schiedam",
+    "lat": 51.92139,
+    "lon": 4.40139
+  },
+  {
+    "id": "NL01495",
+    "name": "Maassluis-Kwartellaan",
+    "municipality": "Maassluis",
+    "lat": 51.93207,
+    "lon": 4.22799
+  },
+  {
+    "id": "NL01496",
+    "name": "Rotterdam-HvHolland",
+    "municipality": "Rotterdam",
+    "lat": 51.9778,
+    "lon": 4.12194
+  },
+  {
+    "id": "NL01497",
+    "name": "Rotterdam-Maasvlakte",
+    "municipality": "Rotterdam",
+    "lat": 51.93352,
+    "lon": 3.99972
+  },
+  {
+    "id": "NL01912",
+    "name": "Ridderkerk-Voorweg",
+    "municipality": "Ridderkerk",
+    "lat": 51.86173,
+    "lon": 4.56381
+  },
+  {
+    "id": "NL01913",
+    "name": "Sluiskil-Stroodorpestraat",
+    "municipality": "Terneuzen",
+    "lat": 51.27938,
+    "lon": 3.83859
+  },
+  {
+    "id": "NL10107",
+    "name": "Posterholt-Vlodropperweg",
+    "municipality": "Roerdalen",
+    "lat": 51.11919,
+    "lon": 6.0424
+  },
+  {
+    "id": "NL10131",
+    "name": "Vredepeel-Vredeweg",
+    "municipality": "Venray",
+    "lat": 51.54052,
+    "lon": 5.85307
+  },
+  {
+    "id": "NL10133",
+    "name": "Wijnandsrade-Opfergeltstraat",
+    "municipality": "Beekdaelen",
+    "lat": 50.90228,
+    "lon": 5.88175
+  },
+  {
+    "id": "NL10136",
+    "name": "Heerlen-Looierstraat",
+    "municipality": "Heerlen",
+    "lat": 50.88796,
+    "lon": 5.9705
+  },
+  {
+    "id": "NL10138",
+    "name": "Heerlen-Jamboreepad",
+    "municipality": "Heerlen",
+    "lat": 50.90032,
+    "lon": 5.98685
+  },
+  {
+    "id": "NL10230",
+    "name": "Biest Houtakker-Biestsestraat",
+    "municipality": "Hilvarenbeek",
+    "lat": 51.51844,
+    "lon": 5.14845
+  },
+  {
+    "id": "NL10235",
+    "name": "Huijbergen-Vennekenstraat",
+    "municipality": "Woensdrecht",
+    "lat": 51.43444,
+    "lon": 4.35984
+  },
+  {
+    "id": "NL10236",
+    "name": "Eindhoven-Genovevalaan",
+    "municipality": "Eindhoven",
+    "lat": 51.46866,
+    "lon": 5.47235
+  },
+  {
+    "id": "NL10237",
+    "name": "Eindhoven-Noordbrabantlaan",
+    "municipality": "Eindhoven",
+    "lat": 51.44416,
+    "lon": 5.44483
+  },
+  {
+    "id": "NL10240",
+    "name": "Breda-Tilburgseweg",
+    "municipality": "Breda",
+    "lat": 51.59353,
+    "lon": 4.82494
+  },
+  {
+    "id": "NL10241",
+    "name": "Breda-Bastenakenstraat",
+    "municipality": "Breda",
+    "lat": 51.60308,
+    "lon": 4.78102
+  },
+  {
+    "id": "NL10246",
+    "name": "Fijnaart-Zwingelspaansedijk",
+    "municipality": "Moerdijk",
+    "lat": 51.65373,
+    "lon": 4.51527
+  },
+  {
+    "id": "NL10247",
+    "name": "Veldhoven-Europalaan",
+    "municipality": "Veldhoven",
+    "lat": 51.40736,
+    "lon": 5.39333
+  },
+  {
+    "id": "NL10248",
+    "name": "Nistelrode-Gagelstraat",
+    "municipality": "Bernheze",
+    "lat": 51.69819,
+    "lon": 5.54333
+  },
+  {
+    "id": "NL10301",
+    "name": "Zierikzee-Lange Slikweg",
+    "municipality": "Schouwen-Duiveland",
+    "lat": 51.63471,
+    "lon": 3.91662
+  },
+  {
+    "id": "NL10318",
+    "name": "Philippine-Stelleweg",
+    "municipality": "Terneuzen",
+    "lat": 51.2945,
+    "lon": 3.74948
+  },
+  {
+    "id": "NL10320",
+    "name": "Burgh-Haamstede",
+    "municipality": "Schouwen-Duiveland",
+    "lat": 51.70644,
+    "lon": 3.7145
+  },
+  {
+    "id": "NL10404",
+    "name": "Den Haag-Rebecquestraat",
+    "municipality": "'s-Gravenhage",
+    "lat": 52.07715,
+    "lon": 4.28918
+  },
+  {
+    "id": "NL10418",
+    "name": "Rotterdam-Schiedamsevest",
+    "municipality": "Rotterdam",
+    "lat": 51.91423,
+    "lon": 4.47992
+  },
+  {
+    "id": "NL10437",
+    "name": "Westmaas-Groeneweg",
+    "municipality": "Hoeksche Waard",
+    "lat": 51.78658,
+    "lon": 4.45053
+  },
+  {
+    "id": "NL10442",
+    "name": "Dordrecht-Bamendaweg",
+    "municipality": "Dordrecht",
+    "lat": 51.80066,
+    "lon": 4.70824
+  },
+  {
+    "id": "NL10444",
+    "name": "De Zilk-Vogelaarsdreef",
+    "municipality": "Noordwijk",
+    "lat": 52.29656,
+    "lon": 4.51082
+  },
+  {
+    "id": "NL10445",
+    "name": "Den Haag-Amsterdamse Veerkade",
+    "municipality": "'s-Gravenhage",
+    "lat": 52.07507,
+    "lon": 4.31587
+  },
+  {
+    "id": "NL10446",
+    "name": "Den Haag-Bleriotlaan",
+    "municipality": "'s-Gravenhage",
+    "lat": 52.03902,
+    "lon": 4.35938
+  },
+  {
+    "id": "NL10449",
+    "name": "Vlaardingen-Riouwlaan",
+    "municipality": "Vlaardingen",
+    "lat": 51.91488,
+    "lon": 4.32943
+  },
+  {
+    "id": "NL10450",
+    "name": "Den Haag-Neherkade",
+    "municipality": "'s-Gravenhage",
+    "lat": 52.06254,
+    "lon": 4.31855
+  },
+  {
+    "id": "NL10451",
+    "name": "Rotterdam-Blankenburgstraat",
+    "municipality": "Rotterdam",
+    "lat": 51.89336,
+    "lon": 4.48792
+  },
+  {
+    "id": "NL10538",
+    "name": "Wieringerwerf-Medemblikkerweg",
+    "municipality": "Hollands Kroon",
+    "lat": 52.80342,
+    "lon": 5.04898
+  },
+  {
+    "id": "NL10552",
+    "name": "Haarlem-Freddie Oversteegenstraat",
+    "municipality": "Haarlem",
+    "lat": 52.37029,
+    "lon": 4.65179
+  },
+  {
+    "id": "NL10617",
+    "name": "Biddinghuizen-Kuilweg",
+    "municipality": "Dronten",
+    "lat": 52.42321,
+    "lon": 5.59338
+  },
+  {
+    "id": "NL10633",
+    "name": "Zegveld-Oude Meije",
+    "municipality": "Woerden",
+    "lat": 52.13795,
+    "lon": 4.83819
+  },
+  {
+    "id": "NL10636",
+    "name": "Utrecht-Kardinaal de Jongweg",
+    "municipality": "Utrecht",
+    "lat": 52.10503,
+    "lon": 5.12446
+  },
+  {
+    "id": "NL10639",
+    "name": "Utrecht-Constant Erzeijstraat",
+    "municipality": "Utrecht",
+    "lat": 52.06775,
+    "lon": 5.12051
+  },
+  {
+    "id": "NL10641",
+    "name": "Breukelen-A2",
+    "municipality": "Stichtse Vecht",
+    "lat": 52.20153,
+    "lon": 4.98744
+  },
+  {
+    "id": "NL10643",
+    "name": "Utrecht-Griftpark",
+    "municipality": "Utrecht",
+    "lat": 52.10131,
+    "lon": 5.12818
+  },
+  {
+    "id": "NL10644",
+    "name": "Cabauw-Wielsekade",
+    "municipality": "Lopik",
+    "lat": 51.97449,
+    "lon": 4.9233
+  },
+  {
+    "id": "NL10722",
+    "name": "Eibergen-Lintveldseweg",
+    "municipality": "Berkelland",
+    "lat": 52.0918,
+    "lon": 6.60537
+  },
+  {
+    "id": "NL10738",
+    "name": "Wekerom-Riemterdijk",
+    "municipality": "Ede",
+    "lat": 52.11162,
+    "lon": 5.70842
+  },
+  {
+    "id": "NL10741",
+    "name": "Nijmegen-Graafseweg",
+    "municipality": "Nijmegen",
+    "lat": 51.84137,
+    "lon": 5.85778
+  },
+  {
+    "id": "NL10742",
+    "name": "Nijmegen-Ruyterstraat",
+    "municipality": "Nijmegen",
+    "lat": 51.83822,
+    "lon": 5.85694
+  },
+  {
+    "id": "NL10807",
+    "name": "Hellendoorn-Luttenbergerweg",
+    "municipality": "Hellendoorn",
+    "lat": 52.38833,
+    "lon": 6.40292
+  },
+  {
+    "id": "NL10818",
+    "name": "Barsbeek-De Veenen",
+    "municipality": "Steenwijkerland",
+    "lat": 52.65414,
+    "lon": 6.01757
+  },
+  {
+    "id": "NL10821",
+    "name": "Enschede-Winkelshorst",
+    "municipality": "Enschede",
+    "lat": 52.2345,
+    "lon": 6.91949
+  },
+  {
+    "id": "NL10918",
+    "name": "Balk-Trophornsterweg",
+    "municipality": "De Friese Meren",
+    "lat": 52.91692,
+    "lon": 5.57349
+  },
+  {
+    "id": "NL10929",
+    "name": "Valthermond-Noorderdiep",
+    "municipality": "Borger-Odoorn",
+    "lat": 52.87573,
+    "lon": 6.93243
+  },
+  {
+    "id": "NL10934",
+    "name": "Kollumerwaard-Hooge Zuidwal",
+    "municipality": "Noardeast-Fryslân",
+    "lat": 53.33042,
+    "lon": 6.27682
+  },
+  {
+    "id": "NL10937",
+    "name": "Groningen-Europaweg",
+    "municipality": "Groningen",
+    "lat": 53.2178,
+    "lon": 6.5789
+  },
+  {
+    "id": "NL10938",
+    "name": "Groningen-Nijensteinheerd",
+    "municipality": "Groningen",
+    "lat": 53.24654,
+    "lon": 6.60894
+  },
+  {
+    "id": "NL49002",
+    "name": "Amsterdam-Haarlemmerweg",
+    "municipality": "Amsterdam",
+    "lat": 52.38542,
+    "lon": 4.87575
+  },
+  {
+    "id": "NL49003",
+    "name": "Amsterdam-Nieuwendammerdijk",
+    "municipality": "Amsterdam",
+    "lat": 52.38931,
+    "lon": 4.94382
+  },
+  {
+    "id": "NL49007",
+    "name": "Amsterdam-Einsteinweg",
+    "municipality": "Amsterdam",
+    "lat": 52.38133,
+    "lon": 4.84523
+  },
+  {
+    "id": "NL49012",
+    "name": "Amsterdam-Van Diemenstraat",
+    "municipality": "Amsterdam",
+    "lat": 52.38998,
+    "lon": 4.88781
+  },
+  {
+    "id": "NL49014",
+    "name": "Amsterdam-Vondelpark",
+    "municipality": "Amsterdam",
+    "lat": 52.35971,
+    "lon": 4.86621
+  },
+  {
+    "id": "NL49016",
+    "name": "Amsterdam-Westerpark",
+    "municipality": "Amsterdam",
+    "lat": 52.39397,
+    "lon": 4.87016
+  },
+  {
+    "id": "NL49017",
+    "name": "Amsterdam-Stadhouderskade",
+    "municipality": "Amsterdam",
+    "lat": 52.35804,
+    "lon": 4.8997
+  },
+  {
+    "id": "NL49019",
+    "name": "Amsterdam-Oude Schans",
+    "municipality": "Amsterdam",
+    "lat": 52.37206,
+    "lon": 4.9044
+  },
+  {
+    "id": "NL49020",
+    "name": "Amsterdam-Jan van Galenstraat",
+    "municipality": "Amsterdam",
+    "lat": 52.37479,
+    "lon": 4.86032
+  },
+  {
+    "id": "NL49021",
+    "name": "Amsterdam -Kantershof",
+    "municipality": "Amsterdam",
+    "lat": 52.32069,
+    "lon": 4.9884
+  },
+  {
+    "id": "NL49022",
+    "name": "Amsterdam-Ookmeer",
+    "municipality": "Amsterdam",
+    "lat": 52.36681,
+    "lon": 4.79334
+  },
+  {
+    "id": "NL49546",
+    "name": "Zaanstad-Hemkade",
+    "municipality": "Zaanstad",
+    "lat": 52.42023,
+    "lon": 4.83206
+  },
+  {
+    "id": "NL49551",
+    "name": "IJmuiden-Kanaalstraat",
+    "municipality": "Velsen",
+    "lat": 52.46304,
+    "lon": 4.60184
+  },
+  {
+    "id": "NL49553",
+    "name": "Wijk aan Zee-De Banjaert",
+    "municipality": "Velsen",
+    "lat": 52.49399,
+    "lon": 4.60199
+  },
+  {
+    "id": "NL49556",
+    "name": "De Rijp-Oostdijkje",
+    "municipality": "Alkmaar",
+    "lat": 52.56359,
+    "lon": 4.8617
+  },
+  {
+    "id": "NL49557",
+    "name": "Wijk aan Zee-Bosweg",
+    "municipality": "Beverwijk",
+    "lat": 52.49005,
+    "lon": 4.59931
+  },
+  {
+    "id": "NL49561",
+    "name": "Badhoevedorp-Sloterweg",
+    "municipality": "Haarlemmermeer",
+    "lat": 52.334,
+    "lon": 4.77401
+  },
+  {
+    "id": "NL49564",
+    "name": "Hoofddorp-Hoofdweg",
+    "municipality": "Haarlemmermeer",
+    "lat": 52.32745,
+    "lon": 4.71507
+  },
+  {
+    "id": "NL49565",
+    "name": "Oude Meer-Aalsmeerderdijk",
+    "municipality": "Haarlemmermeer",
+    "lat": 52.28013,
+    "lon": 4.77082
+  },
+  {
+    "id": "NL49570",
+    "name": "Beverwijk-Creutzberglaan",
+    "municipality": "Velsen",
+    "lat": 52.4893,
+    "lon": 4.64053
+  },
+  {
+    "id": "NL49572",
+    "name": "Velsen-Staalstraat",
+    "municipality": "Velsen",
+    "lat": 52.4744,
+    "lon": 4.6288
+  },
+  {
+    "id": "NL49573",
+    "name": "Velsen-Reyndersweg",
+    "municipality": "Velsen",
+    "lat": 52.47887,
+    "lon": 4.57934
+  },
+  {
+    "id": "NL49680",
+    "name": "Almere-Boomgaardweg",
+    "municipality": "Almere",
+    "lat": 52.37357,
+    "lon": 5.23926
+  },
+  {
+    "id": "NL49701",
+    "name": "Zaandam-Wagenschotpad",
+    "municipality": "Zaanstad",
+    "lat": 52.44801,
+    "lon": 4.81671
+  },
+  {
+    "id": "NL49703",
+    "name": "Spaarnwoude-Machineweg",
+    "municipality": "Haarlemmermeer",
+    "lat": 52.39844,
+    "lon": 4.72858
+  },
+  {
+    "id": "NL49704",
+    "name": "Zaanstad-Hoogtij",
+    "municipality": "Zaanstad",
+    "lat": 52.428,
+    "lon": 4.773
+  },
+  {
+    "id": "NL49980",
+    "name": "Baamsum - Oude Ae",
+    "municipality": "Delfzijl",
+    "lat": 53.29034,
+    "lon": 7.03892
+  },
+  {
+    "id": "NL50002",
+    "name": "Geleen-Vouershof",
+    "municipality": "Sittard-Geleen",
+    "lat": 50.96309,
+    "lon": 5.81071
+  },
+  {
+    "id": "NL50003",
+    "name": "Geleen-Asterstraat",
+    "municipality": "Sittard-Geleen",
+    "lat": 50.98445,
+    "lon": 5.82224
+  },
+  {
+    "id": "NL50007",
+    "name": "Maastricht-Hoge_Fronten",
+    "municipality": "Maastricht",
+    "lat": 50.85205,
+    "lon": 5.6758
+  },
+  {
+    "id": "NL50010",
+    "name": "Maastricht-A2-Philipsweg",
+    "municipality": "Maastricht",
+    "lat": 50.84105,
+    "lon": 5.71898
+  },
+  {
+    "id": "NL50011",
+    "name": "Nederweert-Kuilstraat",
+    "municipality": "Nederweert",
+    "lat": 51.30333,
+    "lon": 5.77136
+  },
+  {
+    "id": "NL50012",
+    "name": "Eijsden-Trichterweg",
+    "municipality": "Eijsden-Margraten",
+    "lat": 50.78366,
+    "lon": 5.70311
+  },
+  {
+    "id": "NL50013",
+    "name": "Meerssen- Beekerweg",
+    "municipality": "Meerssen",
+    "lat": 50.90508,
+    "lon": 5.77365
+  },
+  {
+    "id": "NL50014",
+    "name": "Gulpen-Kuttingerweg",
+    "municipality": "Gulpen-Wittem",
+    "lat": 50.75998,
+    "lon": 5.91679
+  },
+  {
+    "id": "NL53001",
+    "name": "Ossendrecht-Burgemeester Voetenstraat",
+    "municipality": "Woensdrecht",
+    "lat": 51.39329,
+    "lon": 4.32024
+  },
+  {
+    "id": "NL53004",
+    "name": "Moerdijk-Julianastraat",
+    "municipality": "Moerdijk",
+    "lat": 51.69941,
+    "lon": 4.62371
+  },
+  {
+    "id": "NL53015",
+    "name": "Klundert-Kerkweg",
+    "municipality": "Moerdijk",
+    "lat": 51.66894,
+    "lon": 4.54166
+  },
+  {
+    "id": "NL53016",
+    "name": "Zevenbergen-Galgenweg",
+    "municipality": "Moerdijk",
+    "lat": 51.6532,
+    "lon": 4.59488
+  },
+  {
+    "id": "NL53020",
+    "name": "Strijensas Buitendijk",
+    "municipality": "Moerdijk",
+    "lat": 51.7134,
+    "lon": 4.58325
+  },
+  {
+    "id": "NL54004",
+    "name": "Arnhem Velperbroek",
+    "municipality": "Arnhem",
+    "lat": 51.97833,
+    "lon": 5.96948
+  },
+  {
+    "id": "NL54010",
+    "name": "Arnhem GelreDome",
+    "municipality": "Arnhem",
+    "lat": 51.9623,
+    "lon": 5.89766
+  }
+]

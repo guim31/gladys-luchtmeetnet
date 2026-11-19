@@ -1,67 +1,160 @@
-# Template de démonstration
+# Luchtmeetnet
 
-Ceci est la documentation utilisateur de l'intégration. Gladys ré-héberge ce
-fichier et affiche un lien **Documentation** permanent vers lui dans l'écran
-de configuration (dans la langue de l'utilisateur, avec l'anglais en repli) —
-c'est au moment de configurer que l'utilisateur en a le plus besoin. Gardez
-les courtes indications d'accueil dans les blocs `section` du `config_schema`
-du manifest ; mettez ici le pas-à-pas détaillé (captures d'écran, dépannage…).
+La qualité de l'air mesurée par les stations officielles néerlandaises de
+[Luchtmeetnet](https://www.luchtmeetnet.nl), le réseau national de mesure de la
+qualité de l'air piloté par le RIVM avec la DCMR, la GGD Amsterdam et les
+provinces : l'indice néerlandais de qualité de l'air (LKI) et les polluants,
+station par station, heure par heure.
 
-## Ce que vous obtenez
+Non affilié à Luchtmeetnet ni au RIVM. Les données viennent de son API ouverte
+(`api.luchtmeetnet.nl`), utilisées telles que Luchtmeetnet les publie.
 
-Six appareils de démonstration apparaissent après l'installation : une
-station météo (vraies données Open-Meteo), un interrupteur, une lampe
-variable, une prise connectée avec mesure de puissance, un détecteur de
-mouvement et une caméra.
+## Ce que fait l'intégration
+
+- Lit les stations Luchtmeetnet que vous choisissez (10 au plus), sans compte
+  ni clé.
+- Crée **un appareil par station** : le LKI (de 1 à 11) et sa tranche en
+  toutes lettres, les composants que la station mesure (PM2.5, PM10, NO₂, O₃,
+  SO₂, NH₃, NO, CO, benzène) et l'âge des données.
+- Ajoute un widget **Qualité de l'air Luchtmeetnet** au tableau de bord, deux
+  déclencheurs de scène (**LKI au-dessus d'un seuil**, **polluant au-dessus
+  d'un seuil**) et une action de scène **Obtenir la qualité de l'air**.
+- Trouve une station par son nom, sa ville ou son numéro, ou les plus proches
+  de votre maison.
+
+Lecture seule : l'intégration ne fait que lire des données publiques.
+
+## Prérequis
+
+- Gladys Assistant 5.3.0 ou plus récent.
+- Un accès Internet de Gladys vers `api.luchtmeetnet.nl`.
+- Pour chercher autour de la maison : sa position, dans **Paramètres →
+  Maisons**.
 
 ## Configuration
 
+### Choisir les stations
+
 1. Ouvrez l'onglet **Configuration** de l'intégration.
-2. Renseignez la **latitude** et la **longitude** que la station météo de
-   démonstration doit observer (Paris par défaut), et choisissez votre unité
-   de température. L'**intervalle de rafraîchissement** règle la fréquence
-   de lecture de la station météo et de la puissance de la prise : toutes
-   les 5 minutes par défaut, toutes les minutes au plus.
-3. Enregistrez : les appareils apparaissent dans l'onglet **Découverte**,
-   prêts à être ajoutés.
+2. Cliquez sur **Trouver une station** : saisissez un nom, une ville ou un
+   numéro (`Utrecht`, `den haag`), ou laissez vide pour lister les stations
+   les plus proches de votre maison, avec leur distance.
+3. Recopiez les numéros voulus dans **Stations**, séparés par des virgules :
+   par exemple `NL49014, NL10938`. Enregistrez.
+4. Dans l'onglet **Découverte**, ajoutez les stations à Gladys.
 
-Le réglage **Préférer la connexion locale** pilote la prise de
-démonstration : elle affiche en badge le canal réellement utilisé (local ou
-cloud), avec un point orange quand elle fonctionne en mode dégradé (local
-refusé, bascule cloud).
+La [carte des stations](https://www.luchtmeetnet.nl/stations/kaart) les montre
+toutes.
 
-## Actions
+### Autres réglages
 
-- **Tester le fournisseur météo** — effectue une requête en direct vers
-  Open-Meteo et affiche la température et l'humidité actuelles sous le
-  bouton.
-- **Identifier un appareil** — choisissez un de vos appareils dans la liste
-  et il se signale (la lampe de démonstration « clignote » dans les logs).
+- **Relevé** : toutes les 30 minutes (par défaut) ou toutes les heures.
+  Luchtmeetnet publie des valeurs horaires, un peu après chaque heure : lire
+  plus souvent n'apporterait rien.
+- **Langue** : langue des noms de fonctionnalités (fixés à l'ajout d'un
+  appareil, à choisir donc avant) et des textes de scène. Français par défaut.
+
+Le bouton **Vérifier les stations** lit chaque station tout de suite et dit ce
+qu'elle répond.
+
+## Appareils
+
+Un appareil par station, nommé `Luchtmeetnet <station>`.
+
+| Fonctionnalité                               | Valeurs                                         |
+| -------------------------------------------- | ----------------------------------------------- |
+| Indice de qualité de l'air (LKI)             | de 1 à 11 (indice néerlandais, ci-dessous)      |
+| Qualité de l'air                             | la tranche en toutes lettres, dans votre langue |
+| PM2.5, PM10, NO₂, O₃, SO₂, NH₃, NO, CO, C₆H₆ | µg/m³, moyenne horaire                          |
+| Âge de la mesure                             | minutes depuis l'heure des dernières données    |
+
+Seuls les composants que la station mesure sont créés. NH₃, NO, CO et benzène
+n'ont pas de type dédié dans Gladys en µg/m³ : ils apparaissent comme des
+valeurs simples, nommées par leur formule. Les infimes valeurs négatives (bruit
+de l'appareil autour de zéro) sont publiées à 0.
+
+Le **LKI** (Luchtkwaliteitsindex) va de 1 à 11 en cinq tranches : 1-3 Bon
+(Goed), 4-6 Moyen (Matig), 7-8 Insuffisant (Onvoldoende), 9-10 Mauvais
+(Slecht), 11 Très mauvais (Zeer slecht). Luchtmeetnet le calcule à partir des
+polluants de la station ; le pire le fixe.
+
+Une valeur de plus de 3 heures n'est plus publiée comme actuelle : Gladys garde
+la dernière avec sa date, et le widget dit que les données sont périmées.
+
+## Widget
+
+**Qualité de l'air Luchtmeetnet** :
+
+- avec une station choisie : jusqu'à quatre tuiles de polluants, le LKI coloré
+  (vert, orange, rouge) et l'âge des données ;
+- sans : une ligne par station, son LKI coloré.
+
+Le réglage **Masquer** cache les tuiles des polluants, l'heure des données ou
+la ligne de source.
 
 ## Scènes
 
-L'intégration ajoute ses propres cartes à l'éditeur de scènes (Gladys 5.1
-ou plus récent), dans la catégorie **Intégrations** :
+### Déclencheur : Luchtmeetnet : LKI au-dessus d'un seuil
 
-- **Mouvement détecté** (déclencheur) — lance la scène quand un détecteur
-  de démonstration voit bouger quelque chose. Choisissez éventuellement le
-  détecteur et ce qui a bougé (personne, animal) ; laissés vides, toute
-  détection correspond. Les actions suivantes peuvent lire ce qui a bougé
-  avec `{{triggerEvent.data.target}}`.
-- **Identifier un appareil** (action) — fait se signaler l'appareil choisi.
-  Elle indique si l'appareil a pu se signaler, pour que les actions
-  suivantes puissent en dépendre.
+Se déclenche quand le LKI d'une station monte au **seuil** choisi (de 2 à 11)
+ou au-dessus. Un événement par seuil franchi : une scène réglée sur 7 se lance
+une fois quand le LKI passe de 5 à 8, et de nouveau seulement après que le LKI
+est redescendu sous 7. Filtres : la station, le seuil. Informations pour les
+actions : nom de la station, LKI, LKI précédent, seuil, tranche, un résumé
+prêt à l'emploi.
 
-## Tableau de bord
+### Déclencheur : Luchtmeetnet : polluant au-dessus d'un seuil
 
-Ajoutez le widget **État de la démo** à un tableau de bord : il affiche en
-direct la température de la station météo et la puissance de la prise du
-bureau, la connexion utilisée par la prise (en orange si dégradée) et la
-position observée. Son bouton **Identifier la lampe** fait se signaler la
-lampe de démonstration.
+Se déclenche quand la moyenne horaire d'un **polluant** monte au **seuil**
+choisi en µg/m³ (de 10 à 350) ou au-dessus, de la même façon. Repères horaires
+de l'UE : NO₂ 200, SO₂ 350, O₃ 180 (information) et 240 (alerte).
+Informations : nom de la station, polluant, valeur, valeur précédente, seuil,
+un résumé.
+
+La première heure lue après l'installation, ou après plus de 3 heures sans
+données, fixe la référence et ne déclenche rien ; un redémarrage ne déclenche
+pas deux fois la même heure.
+
+### Action : Luchtmeetnet : obtenir la qualité de l'air
+
+La qualité de l'air d'une station, ou de la station dont le LKI est le pire :
+résumé, tranche, LKI, PM2.5, PM10, NO₂, O₃ et l'âge des données, pour les
+actions suivantes (un message, une condition).
+
+## Exemples de scènes
+
+- **Fermer les fenêtres** : déclencheur _LKI au-dessus d'un seuil_ à 7 →
+  envoyer `{{triggerEvent.data.summary}}` et couper la ventilation.
+- **Alerte ozone** : déclencheur _polluant au-dessus d'un seuil_, O₃ à 180 →
+  envoyer « Ozone au-dessus du seuil d'information ».
+- **Point du matin** : à 7 h 30, action _obtenir la qualité de l'air_ sans
+  station, puis envoyer son résumé dans le message du matin.
+- **On peut aérer** : quand la fonctionnalité LKI de votre station passe sous
+  4, envoyer « Vous pouvez rouvrir les fenêtres ».
 
 ## Dépannage
 
-L'intégration journalise tout ce qu'elle fait : consultez les logs de
-l'intégration depuis l'interface Gladys (ou `docker logs` sur l'hôte) avec
-`LOG_LEVEL=debug` pour le détail complet.
+- **« Aucune station »** sur l'écran de configuration : saisissez au moins un
+  numéro de station dans **Stations**.
+- **« pas une station Luchtmeetnet »** dans la vérification : Luchtmeetnet ne
+  connaît pas ce numéro ; utilisez **Trouver une station**.
+- **« L'API de Luchtmeetnet ne répond pas »** : les valeurs sont gardées et
+  relues au relevé suivant. L'onglet Journaux signale l'erreur une fois, et sa
+  fin.
+- **LKI sans valeur** : Luchtmeetnet ne donne pas d'indice pour cette station
+  ou cette heure (certaines stations ne mesurent que quelques composants).
+- Détails dans l'onglet **Journaux** de l'intégration (`LOG_LEVEL=debug` pour
+  plus).
+
+## Limites
+
+- Données horaires, publiées par Luchtmeetnet un peu après chaque heure : les
+  valeurs sont validées plus tard et peuvent encore changer sur le site de
+  Luchtmeetnet.
+- Ce sont des mesures, pas des prévisions.
+- Luchtmeetnet limite son API à 100 requêtes par 5 minutes : l'intégration lit
+  10 stations au plus, deux ou trois requêtes par station et par relevé, et
+  jamais plus de 90 requêtes par 5 minutes.
+- Les coordonnées des stations utilisées par **Trouver une station** sont
+  livrées avec l'intégration ; une station ouverte depuis se trouve par son nom
+  ou son numéro, sans distance tant qu'elle n'a pas été lue une fois.

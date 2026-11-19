@@ -1,0 +1,37 @@
+{
+  "pagination": {
+    "last_page": 5,
+    "first_page": 1,
+    "prev_page": 1,
+    "current_page": 2,
+    "page_list": [1, 2, 3, 4, 5],
+    "next_page": 3
+  },
+  "data": [
+    { "number": "NL49561", "location": "Badhoevedorp-Sloterweg" },
+    { "number": "NL49557", "location": "Wijk aan Zee-Bosweg" },
+    { "number": "NL49556", "location": "De Rijp-Oostdijkje" },
+    { "number": "NL49553", "location": "Wijk aan Zee-De Banjaert" },
+    { "number": "NL49551", "location": "IJmuiden-Kanaalstraat" },
+    { "number": "NL49546", "location": "Zaanstad-Hemkade" },
+    { "number": "NL49022", "location": "Amsterdam-Ookmeer" },
+    { "number": "NL49021", "location": "Amsterdam -Kantershof" },
+    { "number": "NL49020", "location": "Amsterdam-Jan van Galenstraat" },
+    { "number": "NL49019", "location": "Amsterdam-Oude Schans" },
+    { "number": "NL49017", "location": "Amsterdam-Stadhouderskade" },
+    { "number": "NL49016", "location": "Amsterdam-Westerpark" },
+    { "number": "NL49014", "location": "Amsterdam-Vondelpark" },
+    { "number": "NL49012", "location": "Amsterdam-Van Diemenstraat" },
+    { "number": "NL49007", "location": "Amsterdam-Einsteinweg" },
+    { "number": "NL49003", "location": "Amsterdam-Nieuwendammerdijk" },
+    { "number": "NL49002", "location": "Amsterdam-Haarlemmerweg" },
+    { "number": "NL10938", "location": "Groningen-Nijensteinheerd" },
+    { "number": "NL10937", "location": "Groningen-Europaweg" },
+    { "number": "NL10934", "location": "Kollumerwaard-Hooge Zuidwal" },
+    { "number": "NL10929", "location": "Valthermond-Noorderdiep" },
+    { "number": "NL10918", "location": "Balk-Trophornsterweg" },
+    { "number": "NL10821", "location": "Enschede-Winkelshorst" },
+    { "number": "NL10818", "location": "Barsbeek-De Veenen" },
+    { "number": "NL10807", "location": "Hellendoorn-Luttenbergerweg" }
+  ]
+}

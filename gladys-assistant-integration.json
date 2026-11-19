@@ -1,177 +1,1037 @@
 {
   "manifest_version": 1,
   "type": "device",
-  "name": "Demo Devices Template",
+  "name": "Luchtmeetnet",
   "description": {
-    "en": "Starter template showing sensors, a switch, a dimmable light and a smart plug.",
-    "fr": "Template de démarrage : capteurs, interrupteur, lampe variable et prise connectée."
+    "en": "Official Dutch air quality (Luchtmeetnet): LKI index and pollutants of the stations, hourly.",
+    "fr": "Qualité de l'air officielle des Pays-Bas (Luchtmeetnet) : indice LKI et polluants, heure par heure.",
+    "de": "Offizielle Luftqualität der Niederlande (Luchtmeetnet): LKI-Index und Schadstoffe, stündlich.",
+    "es": "Calidad del aire oficial de los Países Bajos (Luchtmeetnet): índice LKI y contaminantes, cada hora."
   },
   "version": "1.0.0",
-  "docker_image": "ghcr.io/gladysassistant/integration-template-js:1.0.0",
-  "gladys_version": ">=5.1.0",
-  "cover_image": "https://raw.githubusercontent.com/GladysAssistant/integration-template-js/master/cover.png",
-  "categories": ["lighting", "security", "environment"],
-  "transports": ["local", "cloud"],
+  "docker_image": "ghcr.io/guim31/gladys-luchtmeetnet:1.0.0",
+  "gladys_version": ">=5.3.0",
+  "countries": ["NL"],
+  "cover_image": "https://raw.githubusercontent.com/guim31/gladys-luchtmeetnet/main/cover.png",
+  "categories": ["environment"],
+  "transports": ["cloud"],
+  "location": true,
   "config_schema": [
     {
       "key": "intro",
       "type": "section",
-      "label": { "en": "Getting started", "fr": "Pour commencer" },
+      "label": {
+        "en": "Dutch air quality stations",
+        "fr": "Stations néerlandaises de qualité de l'air",
+        "de": "Niederländische Luftqualitätsstationen",
+        "es": "Estaciones neerlandesas de calidad del aire"
+      },
       "description": {
-        "en": "The demo weather station reads real data from the free Open-Meteo API: pick the coordinates to observe. No account, no API key.",
-        "fr": "La station météo de démonstration lit de vraies données via l'API gratuite Open-Meteo : choisissez les coordonnées à observer. Pas de compte, pas de clé d'API."
+        "en": "Reads the official measuring stations of Luchtmeetnet (RIVM, DCMR, GGD Amsterdam and the provinces) through its open API (no account). Not affiliated with Luchtmeetnet nor RIVM.",
+        "fr": "Lit les stations de mesure officielles de Luchtmeetnet (RIVM, DCMR, GGD Amsterdam et les provinces) par son API ouverte (sans compte). Non affilié à Luchtmeetnet ni au RIVM.",
+        "de": "Liest die offiziellen Messstationen von Luchtmeetnet (RIVM, DCMR, GGD Amsterdam und die Provinzen) über die offene API (ohne Konto). Nicht mit Luchtmeetnet oder RIVM verbunden.",
+        "es": "Lee las estaciones de medición oficiales de Luchtmeetnet (RIVM, DCMR, GGD Amsterdam y las provincias) mediante su API abierta (sin cuenta). Sin afiliación con Luchtmeetnet ni RIVM."
       },
       "links": [
         {
-          "url": "https://open-meteo.com/en/docs",
-          "label": { "en": "Open-Meteo documentation", "fr": "Documentation Open-Meteo" }
+          "url": "https://www.luchtmeetnet.nl/stations/kaart",
+          "label": {
+            "en": "Map of the stations",
+            "fr": "Carte des stations",
+            "de": "Karte der Stationen",
+            "es": "Mapa de las estaciones"
+          }
+        },
+        {
+          "url": "https://api-docs.luchtmeetnet.nl/",
+          "label": {
+            "en": "The Luchtmeetnet API",
+            "fr": "L'API de Luchtmeetnet",
+            "de": "Die Luchtmeetnet-API",
+            "es": "La API de Luchtmeetnet"
+          }
         }
       ]
     },
     {
-      "key": "latitude",
-      "type": "number",
-      "label": { "en": "Latitude", "fr": "Latitude" },
-      "description": {
-        "en": "Latitude used for the demo weather sensor.",
-        "fr": "Latitude utilisée par le capteur météo de démonstration."
+      "key": "stations",
+      "type": "string",
+      "label": {
+        "en": "Stations",
+        "fr": "Stations",
+        "de": "Stationen",
+        "es": "Estaciones"
       },
-      "placeholder": { "en": "e.g. 48.8566", "fr": "ex. 48.8566" },
-      "required": true,
-      "default": 48.8566,
-      "min": -90,
-      "max": 90
-    },
-    {
-      "key": "longitude",
-      "type": "number",
-      "label": { "en": "Longitude", "fr": "Longitude" },
       "description": {
-        "en": "Longitude used for the demo weather sensor.",
-        "fr": "Longitude utilisée par le capteur météo de démonstration."
+        "en": "The numbers of the Luchtmeetnet stations to read, separated by commas (10 at most). The \"Find a station\" button below gives them, by name or around a house.",
+        "fr": "Les numéros des stations Luchtmeetnet à lire, séparés par des virgules (10 au plus). Le bouton « Trouver une station » ci-dessous les donne, par nom ou autour d'une maison.",
+        "de": "Die Nummern der zu lesenden Luchtmeetnet-Stationen, durch Kommas getrennt (höchstens 10). Der Button „Station finden“ unten liefert sie, nach Name oder in der Nähe eines Hauses.",
+        "es": "Los números de las estaciones de Luchtmeetnet que desea leer, separados por comas (10 como máximo). El botón «Buscar una estación» más abajo se los da, por nombre o alrededor de una casa."
       },
-      "placeholder": { "en": "e.g. 2.3522", "fr": "ex. 2.3522" },
-      "required": true,
-      "default": 2.3522,
-      "min": -180,
-      "max": 180
-    },
-    {
-      "key": "unit",
-      "type": "select",
-      "label": { "en": "Temperature unit", "fr": "Unité de température" },
+      "placeholder": {
+        "en": "e.g. NL49014, NL10938",
+        "fr": "ex. NL49014, NL10938",
+        "de": "z. B. NL49014, NL10938",
+        "es": "p. ej. NL49014, NL10938"
+      },
       "required": false,
-      "default": "celsius",
+      "default": ""
+    },
+    {
+      "key": "refresh_minutes",
+      "type": "select",
+      "label": {
+        "en": "Refresh",
+        "fr": "Relevé",
+        "de": "Abruf",
+        "es": "Lectura"
+      },
+      "description": {
+        "en": "Luchtmeetnet publishes hourly values, a little after each hour.",
+        "fr": "Luchtmeetnet publie des valeurs horaires, un peu après chaque heure.",
+        "de": "Luchtmeetnet veröffentlicht Stundenwerte, kurz nach jeder vollen Stunde.",
+        "es": "Luchtmeetnet publica valores horarios, poco después de cada hora."
+      },
+      "required": false,
+      "default": "30",
       "options": [
-        { "value": "celsius", "label": { "en": "Celsius", "fr": "Celsius" } },
-        { "value": "fahrenheit", "label": { "en": "Fahrenheit", "fr": "Fahrenheit" } }
+        {
+          "value": "30",
+          "label": {
+            "en": "Every 30 minutes",
+            "fr": "Toutes les 30 minutes",
+            "de": "Alle 30 Minuten",
+            "es": "Cada 30 minutos"
+          }
+        },
+        {
+          "value": "60",
+          "label": {
+            "en": "Every hour",
+            "fr": "Toutes les heures",
+            "de": "Jede Stunde",
+            "es": "Cada hora"
+          }
+        }
       ]
     },
     {
-      "key": "poll_frequency",
-      "type": "number",
-      "label": { "en": "Refresh interval (s)", "fr": "Intervalle de rafraîchissement (s)" },
+      "key": "language",
+      "type": "select",
+      "label": {
+        "en": "Language",
+        "fr": "Langue",
+        "de": "Sprache",
+        "es": "Idioma"
+      },
       "description": {
-        "en": "How often sensors are polled, in seconds (one minute minimum).",
-        "fr": "Fréquence d'interrogation des capteurs, en secondes (une minute minimum)."
+        "en": "Language of the feature names (set when a device is added) and of the scene texts.",
+        "fr": "Langue des noms de fonctionnalités (fixés à l'ajout d'un appareil) et des textes de scène.",
+        "de": "Sprache der Funktionsnamen (beim Hinzufügen eines Geräts festgelegt) und der Szenentexte.",
+        "es": "Idioma de los nombres de las funciones (fijados al añadir un dispositivo) y de los textos de escena."
       },
       "required": false,
-      "default": 300,
-      "min": 60,
-      "max": 3600
+      "default": "fr",
+      "options": [
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "Anglais",
+            "de": "Englisch",
+            "es": "Inglés"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "French",
+            "fr": "Français",
+            "de": "Französisch",
+            "es": "Francés"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "German",
+            "fr": "Allemand",
+            "de": "Deutsch",
+            "es": "Alemán"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Spanish",
+            "fr": "Espagnol",
+            "de": "Spanisch",
+            "es": "Español"
+          }
+        }
+      ]
     }
   ],
   "actions": [
     {
-      "key": "test_weather",
-      "label": { "en": "Test the weather provider", "fr": "Tester le fournisseur météo" },
-      "timeout_seconds": 30
-    },
-    {
-      "key": "identify",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
+      "key": "find_station",
+      "label": {
+        "en": "Find a station",
+        "fr": "Trouver une station",
+        "de": "Station finden",
+        "es": "Buscar una estación"
+      },
+      "timeout_seconds": 30,
       "fields": [
         {
-          "key": "device",
+          "key": "query",
+          "type": "string",
+          "label": {
+            "en": "Name, town or number",
+            "fr": "Nom, ville ou numéro",
+            "de": "Name, Ort oder Nummer",
+            "es": "Nombre, ciudad o número"
+          },
+          "description": {
+            "en": "Accents are optional. Empty: the stations nearest to the house.",
+            "fr": "Les accents sont facultatifs. Vide : les stations les plus proches de la maison.",
+            "de": "Akzente sind optional. Leer: die Stationen, die dem Haus am nächsten sind.",
+            "es": "Los acentos son opcionales. Vacío: las estaciones más cercanas a la casa."
+          },
+          "placeholder": {
+            "en": "e.g. Amsterdam",
+            "fr": "ex. Amsterdam",
+            "de": "z. B. Amsterdam",
+            "es": "p. ej. Amsterdam"
+          },
+          "required": false
+        },
+        {
+          "key": "house",
           "type": "select",
-          "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
+          "source": "houses",
+          "label": {
+            "en": "House",
+            "fr": "Maison",
+            "de": "Haus",
+            "es": "Casa"
+          },
+          "description": {
+            "en": "Sorts by distance. Its location is set in Settings → Houses. Empty: the first located house when no name is typed.",
+            "fr": "Trie par distance. Sa position se règle dans Paramètres → Maisons. Vide : la première maison située si aucun nom n'est saisi.",
+            "de": "Sortiert nach Entfernung. Sein Standort wird unter Einstellungen → Zuhause festgelegt. Leer: das erste Haus mit Standort, wenn kein Name eingegeben ist.",
+            "es": "Ordena por distancia. Su ubicación se define en Configuración → Viviendas. Vacío: la primera casa con ubicación si no escribe ningún nombre."
+          },
+          "required": false
         }
       ]
+    },
+    {
+      "key": "check_stations",
+      "label": {
+        "en": "Check the stations",
+        "fr": "Vérifier les stations",
+        "de": "Stationen prüfen",
+        "es": "Comprobar las estaciones"
+      },
+      "timeout_seconds": 120
     }
   ],
   "scene_triggers": [
     {
-      "key": "motion_detected",
-      "label": { "en": "Motion detected", "fr": "Mouvement détecté" },
+      "key": "lki_above_threshold",
+      "label": {
+        "en": "Luchtmeetnet: LKI above a threshold",
+        "fr": "Luchtmeetnet : LKI au-dessus d'un seuil",
+        "de": "Luchtmeetnet: LKI über einer Schwelle",
+        "es": "Luchtmeetnet: LKI por encima de un umbral"
+      },
       "description": {
-        "en": "A demo motion sensor saw a person or an animal move.",
-        "fr": "Un détecteur de démonstration a vu bouger une personne ou un animal."
+        "en": "The LKI of a station rises to the threshold or above (once per crossing, hour by hour).",
+        "fr": "Le LKI d'une station monte au seuil ou au-dessus (une fois par franchissement, heure par heure).",
+        "de": "Der LKI einer Station steigt auf die Schwelle oder darüber (einmal pro Überschreitung, stündlich).",
+        "es": "El LKI de una estación sube al umbral o por encima (una vez por cruce, hora a hora)."
       },
       "fields": [
         {
-          "key": "device",
+          "key": "station",
           "type": "select",
           "source": "devices",
-          "label": { "en": "Sensor", "fr": "Détecteur" }
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "Empty: any station.",
+            "fr": "Vide : toutes les stations.",
+            "de": "Leer: jede Station.",
+            "es": "Vacío: cualquier estación."
+          },
+          "required": false
         },
         {
-          "key": "target",
-          "type": "multi_select",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" },
+          "key": "threshold",
+          "type": "select",
+          "label": {
+            "en": "Threshold (LKI)",
+            "fr": "Seuil (LKI)",
+            "de": "Schwelle (LKI)",
+            "es": "Umbral (LKI)"
+          },
+          "description": {
+            "en": "1-3 good, 4-6 moderate, 7-8 insufficient, 9-10 bad, 11 very bad.",
+            "fr": "1-3 bon, 4-6 moyen, 7-8 insuffisant, 9-10 mauvais, 11 très mauvais.",
+            "de": "1-3 gut, 4-6 mäßig, 7-8 unzureichend, 9-10 schlecht, 11 sehr schlecht.",
+            "es": "1-3 buena, 4-6 moderada, 7-8 insuficiente, 9-10 mala, 11 muy mala."
+          },
+          "required": true,
           "options": [
-            { "value": "person", "label": { "en": "Person", "fr": "Personne" } },
-            { "value": "animal", "label": { "en": "Animal", "fr": "Animal" } }
+            {
+              "value": "2",
+              "label": {
+                "en": "2",
+                "fr": "2",
+                "de": "2",
+                "es": "2"
+              }
+            },
+            {
+              "value": "3",
+              "label": {
+                "en": "3",
+                "fr": "3",
+                "de": "3",
+                "es": "3"
+              }
+            },
+            {
+              "value": "4",
+              "label": {
+                "en": "4",
+                "fr": "4",
+                "de": "4",
+                "es": "4"
+              }
+            },
+            {
+              "value": "5",
+              "label": {
+                "en": "5",
+                "fr": "5",
+                "de": "5",
+                "es": "5"
+              }
+            },
+            {
+              "value": "6",
+              "label": {
+                "en": "6",
+                "fr": "6",
+                "de": "6",
+                "es": "6"
+              }
+            },
+            {
+              "value": "7",
+              "label": {
+                "en": "7",
+                "fr": "7",
+                "de": "7",
+                "es": "7"
+              }
+            },
+            {
+              "value": "8",
+              "label": {
+                "en": "8",
+                "fr": "8",
+                "de": "8",
+                "es": "8"
+              }
+            },
+            {
+              "value": "9",
+              "label": {
+                "en": "9",
+                "fr": "9",
+                "de": "9",
+                "es": "9"
+              }
+            },
+            {
+              "value": "10",
+              "label": {
+                "en": "10",
+                "fr": "10",
+                "de": "10",
+                "es": "10"
+              }
+            },
+            {
+              "value": "11",
+              "label": {
+                "en": "11",
+                "fr": "11",
+                "de": "11",
+                "es": "11"
+              }
+            }
           ]
         }
       ],
       "variables": [
         {
-          "key": "target",
+          "key": "station_name",
           "type": "string",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" }
+          "label": {
+            "en": "Station name",
+            "fr": "Nom de la station",
+            "de": "Name der Station",
+            "es": "Nombre de la estación"
+          }
+        },
+        {
+          "key": "lki",
+          "type": "number",
+          "label": {
+            "en": "LKI, 1 to 11",
+            "fr": "LKI, de 1 à 11",
+            "de": "LKI, 1 bis 11",
+            "es": "LKI, de 1 a 11"
+          }
+        },
+        {
+          "key": "previous_lki",
+          "type": "number",
+          "label": {
+            "en": "Previous LKI",
+            "fr": "LKI précédent",
+            "de": "Vorheriger LKI",
+            "es": "LKI anterior"
+          }
+        },
+        {
+          "key": "threshold",
+          "type": "string",
+          "label": {
+            "en": "Threshold crossed",
+            "fr": "Seuil franchi",
+            "de": "Überschrittene Schwelle",
+            "es": "Umbral cruzado"
+          }
+        },
+        {
+          "key": "level",
+          "type": "string",
+          "label": {
+            "en": "Level (key)",
+            "fr": "Niveau (clé)",
+            "de": "Stufe (Schlüssel)",
+            "es": "Nivel (clave)"
+          }
+        },
+        {
+          "key": "level_label",
+          "type": "string",
+          "label": {
+            "en": "Level",
+            "fr": "Niveau",
+            "de": "Stufe",
+            "es": "Nivel"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
+        }
+      ]
+    },
+    {
+      "key": "pollutant_above_threshold",
+      "label": {
+        "en": "Luchtmeetnet: pollutant above a threshold",
+        "fr": "Luchtmeetnet : polluant au-dessus d'un seuil",
+        "de": "Luchtmeetnet: Schadstoff über einer Schwelle",
+        "es": "Luchtmeetnet: contaminante por encima de un umbral"
+      },
+      "description": {
+        "en": "The hourly average of a pollutant rises to the threshold or above, in µg/m³ (once per crossing).",
+        "fr": "La moyenne horaire d'un polluant monte au seuil ou au-dessus, en µg/m³ (une fois par franchissement).",
+        "de": "Der Stundenmittelwert eines Schadstoffs steigt auf die Schwelle oder darüber, in µg/m³ (einmal pro Überschreitung).",
+        "es": "La media horaria de un contaminante sube al umbral o por encima, en µg/m³ (una vez por cruce)."
+      },
+      "fields": [
+        {
+          "key": "station",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "Empty: any station.",
+            "fr": "Vide : toutes les stations.",
+            "de": "Leer: jede Station.",
+            "es": "Vacío: cualquier estación."
+          },
+          "required": false
+        },
+        {
+          "key": "pollutant",
+          "type": "select",
+          "label": {
+            "en": "Pollutant",
+            "fr": "Polluant",
+            "de": "Schadstoff",
+            "es": "Contaminante"
+          },
+          "required": true,
+          "options": [
+            {
+              "value": "pm25",
+              "label": {
+                "en": "PM2.5",
+                "fr": "PM2.5",
+                "de": "PM2.5",
+                "es": "PM2.5"
+              }
+            },
+            {
+              "value": "pm10",
+              "label": {
+                "en": "PM10",
+                "fr": "PM10",
+                "de": "PM10",
+                "es": "PM10"
+              }
+            },
+            {
+              "value": "no2",
+              "label": {
+                "en": "NO₂",
+                "fr": "NO₂",
+                "de": "NO₂",
+                "es": "NO₂"
+              }
+            },
+            {
+              "value": "o3",
+              "label": {
+                "en": "O₃",
+                "fr": "O₃",
+                "de": "O₃",
+                "es": "O₃"
+              }
+            },
+            {
+              "value": "so2",
+              "label": {
+                "en": "SO₂",
+                "fr": "SO₂",
+                "de": "SO₂",
+                "es": "SO₂"
+              }
+            },
+            {
+              "value": "nh3",
+              "label": {
+                "en": "NH₃",
+                "fr": "NH₃",
+                "de": "NH₃",
+                "es": "NH₃"
+              }
+            },
+            {
+              "value": "no",
+              "label": {
+                "en": "NO",
+                "fr": "NO",
+                "de": "NO",
+                "es": "NO"
+              }
+            },
+            {
+              "value": "co",
+              "label": {
+                "en": "CO",
+                "fr": "CO",
+                "de": "CO",
+                "es": "CO"
+              }
+            },
+            {
+              "value": "c6h6",
+              "label": {
+                "en": "C₆H₆",
+                "fr": "C₆H₆",
+                "de": "C₆H₆",
+                "es": "C₆H₆"
+              }
+            }
+          ]
+        },
+        {
+          "key": "threshold",
+          "type": "select",
+          "label": {
+            "en": "Threshold (µg/m³)",
+            "fr": "Seuil (µg/m³)",
+            "de": "Schwelle (µg/m³)",
+            "es": "Umbral (µg/m³)"
+          },
+          "description": {
+            "en": "EU hourly references: NO₂ 200, SO₂ 350, O₃ 180 (information) and 240 (alert).",
+            "fr": "Repères horaires de l'UE : NO₂ 200, SO₂ 350, O₃ 180 (information) et 240 (alerte).",
+            "de": "Stündliche EU-Richtwerte: NO₂ 200, SO₂ 350, O₃ 180 (Information) und 240 (Alarm).",
+            "es": "Referencias horarias de la UE: NO₂ 200, SO₂ 350, O₃ 180 (información) y 240 (alerta)."
+          },
+          "required": true,
+          "options": [
+            {
+              "value": "10",
+              "label": {
+                "en": "10",
+                "fr": "10",
+                "de": "10",
+                "es": "10"
+              }
+            },
+            {
+              "value": "15",
+              "label": {
+                "en": "15",
+                "fr": "15",
+                "de": "15",
+                "es": "15"
+              }
+            },
+            {
+              "value": "20",
+              "label": {
+                "en": "20",
+                "fr": "20",
+                "de": "20",
+                "es": "20"
+              }
+            },
+            {
+              "value": "25",
+              "label": {
+                "en": "25",
+                "fr": "25",
+                "de": "25",
+                "es": "25"
+              }
+            },
+            {
+              "value": "30",
+              "label": {
+                "en": "30",
+                "fr": "30",
+                "de": "30",
+                "es": "30"
+              }
+            },
+            {
+              "value": "40",
+              "label": {
+                "en": "40",
+                "fr": "40",
+                "de": "40",
+                "es": "40"
+              }
+            },
+            {
+              "value": "50",
+              "label": {
+                "en": "50",
+                "fr": "50",
+                "de": "50",
+                "es": "50"
+              }
+            },
+            {
+              "value": "75",
+              "label": {
+                "en": "75",
+                "fr": "75",
+                "de": "75",
+                "es": "75"
+              }
+            },
+            {
+              "value": "100",
+              "label": {
+                "en": "100",
+                "fr": "100",
+                "de": "100",
+                "es": "100"
+              }
+            },
+            {
+              "value": "120",
+              "label": {
+                "en": "120",
+                "fr": "120",
+                "de": "120",
+                "es": "120"
+              }
+            },
+            {
+              "value": "150",
+              "label": {
+                "en": "150",
+                "fr": "150",
+                "de": "150",
+                "es": "150"
+              }
+            },
+            {
+              "value": "180",
+              "label": {
+                "en": "180",
+                "fr": "180",
+                "de": "180",
+                "es": "180"
+              }
+            },
+            {
+              "value": "200",
+              "label": {
+                "en": "200",
+                "fr": "200",
+                "de": "200",
+                "es": "200"
+              }
+            },
+            {
+              "value": "240",
+              "label": {
+                "en": "240",
+                "fr": "240",
+                "de": "240",
+                "es": "240"
+              }
+            },
+            {
+              "value": "350",
+              "label": {
+                "en": "350",
+                "fr": "350",
+                "de": "350",
+                "es": "350"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "station_name",
+          "type": "string",
+          "label": {
+            "en": "Station name",
+            "fr": "Nom de la station",
+            "de": "Name der Station",
+            "es": "Nombre de la estación"
+          }
+        },
+        {
+          "key": "pollutant",
+          "type": "string",
+          "label": {
+            "en": "Pollutant (key)",
+            "fr": "Polluant (clé)",
+            "de": "Schadstoff (Schlüssel)",
+            "es": "Contaminante (clave)"
+          }
+        },
+        {
+          "key": "pollutant_label",
+          "type": "string",
+          "label": {
+            "en": "Pollutant",
+            "fr": "Polluant",
+            "de": "Schadstoff",
+            "es": "Contaminante"
+          }
+        },
+        {
+          "key": "value",
+          "type": "number",
+          "label": {
+            "en": "Value (µg/m³)",
+            "fr": "Valeur (µg/m³)",
+            "de": "Wert (µg/m³)",
+            "es": "Valor (µg/m³)"
+          }
+        },
+        {
+          "key": "previous_value",
+          "type": "number",
+          "label": {
+            "en": "Previous value (µg/m³)",
+            "fr": "Valeur précédente (µg/m³)",
+            "de": "Vorheriger Wert (µg/m³)",
+            "es": "Valor anterior (µg/m³)"
+          }
+        },
+        {
+          "key": "threshold",
+          "type": "string",
+          "label": {
+            "en": "Threshold crossed",
+            "fr": "Seuil franchi",
+            "de": "Überschrittene Schwelle",
+            "es": "Umbral cruzado"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
         }
       ]
     }
   ],
   "scene_actions": [
     {
-      "key": "identify_device",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
-      "description": {
-        "en": "Make a device signal itself (the demo light blinks).",
-        "fr": "Fait se signaler un appareil (la lampe de démonstration clignote)."
+      "key": "get_air_quality",
+      "label": {
+        "en": "Luchtmeetnet: get the air quality",
+        "fr": "Luchtmeetnet : obtenir la qualité de l'air",
+        "de": "Luchtmeetnet: Luftqualität abrufen",
+        "es": "Luchtmeetnet: obtener la calidad del aire"
       },
-      "timeout_seconds": 15,
+      "description": {
+        "en": "Of one station, or the worst of yours, with a sentence ready for a notification.",
+        "fr": "D'une station, ou la pire des vôtres, avec une phrase prête pour une notification.",
+        "de": "Für eine Station oder die schlechteste deiner Stationen, mit einem fertigen Satz für eine Benachrichtigung.",
+        "es": "De una estación, o la peor de las suyas, con una frase lista para una notificación."
+      },
+      "timeout_seconds": 10,
       "fields": [
         {
-          "key": "device",
+          "key": "station",
           "type": "select",
           "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "Empty: the station with the worst LKI.",
+            "fr": "Vide : la station dont le LKI est le pire.",
+            "de": "Leer: die Station mit dem schlechtesten LKI.",
+            "es": "Vacío: la estación con el peor LKI."
+          },
+          "required": false
         }
       ],
       "outputs": [
         {
-          "key": "signalled",
-          "type": "boolean",
-          "label": { "en": "Device signalled", "fr": "Appareil signalé" }
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
+        },
+        {
+          "key": "station_name",
+          "type": "string",
+          "label": {
+            "en": "Station name",
+            "fr": "Nom de la station",
+            "de": "Name der Station",
+            "es": "Nombre de la estación"
+          }
+        },
+        {
+          "key": "level_label",
+          "type": "string",
+          "label": {
+            "en": "Level",
+            "fr": "Niveau",
+            "de": "Stufe",
+            "es": "Nivel"
+          }
+        },
+        {
+          "key": "level",
+          "type": "string",
+          "label": {
+            "en": "Level (key)",
+            "fr": "Niveau (clé)",
+            "de": "Stufe (Schlüssel)",
+            "es": "Nivel (clave)"
+          }
+        },
+        {
+          "key": "lki",
+          "type": "number",
+          "label": {
+            "en": "LKI, 1 to 11",
+            "fr": "LKI, de 1 à 11",
+            "de": "LKI, 1 bis 11",
+            "es": "LKI, de 1 a 11"
+          }
+        },
+        {
+          "key": "pm25",
+          "type": "number",
+          "label": {
+            "en": "PM2.5 (µg/m³)",
+            "fr": "PM2.5 (µg/m³)",
+            "de": "PM2.5 (µg/m³)",
+            "es": "PM2.5 (µg/m³)"
+          }
+        },
+        {
+          "key": "pm10",
+          "type": "number",
+          "label": {
+            "en": "PM10 (µg/m³)",
+            "fr": "PM10 (µg/m³)",
+            "de": "PM10 (µg/m³)",
+            "es": "PM10 (µg/m³)"
+          }
+        },
+        {
+          "key": "no2",
+          "type": "number",
+          "label": {
+            "en": "NO₂ (µg/m³)",
+            "fr": "NO₂ (µg/m³)",
+            "de": "NO₂ (µg/m³)",
+            "es": "NO₂ (µg/m³)"
+          }
+        },
+        {
+          "key": "o3",
+          "type": "number",
+          "label": {
+            "en": "O₃ (µg/m³)",
+            "fr": "O₃ (µg/m³)",
+            "de": "O₃ (µg/m³)",
+            "es": "O₃ (µg/m³)"
+          }
+        },
+        {
+          "key": "age_minutes",
+          "type": "number",
+          "label": {
+            "en": "Measurement age (min)",
+            "fr": "Âge de la mesure (min)",
+            "de": "Alter der Messung (Min.)",
+            "es": "Antigüedad de la medición (min)"
+          }
         }
       ]
     }
   ],
   "widgets": [
     {
-      "key": "demo_status",
-      "label": { "en": "Demo status", "fr": "État de la démo" },
-      "description": {
-        "en": "Live temperature and plug power, plug connection and observed location.",
-        "fr": "Température et puissance en direct, connexion de la prise, position observée."
+      "key": "air_quality",
+      "label": {
+        "en": "Luchtmeetnet air quality",
+        "fr": "Qualité de l'air Luchtmeetnet",
+        "de": "Luchtmeetnet-Luftqualität",
+        "es": "Calidad del aire Luchtmeetnet"
       },
-      "icon": "activity",
-      "action_timeout_seconds": 15
+      "description": {
+        "en": "Dutch LKI of your stations, colored by band, with the main pollutants.",
+        "fr": "LKI néerlandais de vos stations, coloré selon la tranche, avec les principaux polluants.",
+        "de": "Niederländischer LKI deiner Stationen, nach Stufe eingefärbt, mit den Hauptschadstoffen.",
+        "es": "LKI neerlandés de sus estaciones, coloreado según el nivel, con los principales contaminantes."
+      },
+      "icon": "wind",
+      "settings": [
+        {
+          "key": "station",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Station",
+            "de": "Station",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "Empty: one row per station.",
+            "fr": "Vide : une ligne par station.",
+            "de": "Leer: eine Zeile pro Station.",
+            "es": "Vacío: una fila por estación."
+          },
+          "required": false
+        },
+        {
+          "key": "hide",
+          "type": "multi_select",
+          "label": {
+            "en": "Hide",
+            "fr": "Masquer",
+            "de": "Ausblenden",
+            "es": "Ocultar"
+          },
+          "description": {
+            "en": "Optional blocks to hide.",
+            "fr": "Blocs facultatifs à masquer.",
+            "de": "Optionale Blöcke zum Ausblenden.",
+            "es": "Bloques opcionales que desea ocultar."
+          },
+          "required": false,
+          "options": [
+            {
+              "value": "pollutants",
+              "label": {
+                "en": "Pollutant tiles",
+                "fr": "Tuiles des polluants",
+                "de": "Schadstoff-Kacheln",
+                "es": "Mosaicos de contaminantes"
+              }
+            },
+            {
+              "value": "measured",
+              "label": {
+                "en": "Hour of the data",
+                "fr": "Heure des données",
+                "de": "Zeit der Daten",
+                "es": "Hora de los datos"
+              }
+            },
+            {
+              "value": "source",
+              "label": {
+                "en": "Source line",
+                "fr": "Ligne de source",
+                "de": "Quellenzeile",
+                "es": "Línea de fuente"
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
