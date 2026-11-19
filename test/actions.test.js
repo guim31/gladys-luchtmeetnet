@@ -57,8 +57,8 @@ test('no match, or no name and no located house: a failure, in four languages', 
   assert.equal(ack.error.fr, 'Aucune station Luchtmeetnet pour « Paris ».');
 });
 
-test('check the stations: LKI, components, age, and the typos', async () => {
-  const w = await createWorld({ config: { stations: `${AMSTERDAM}, nl10938, abc` } });
+test('check the stations: LKI, components, age', async () => {
+  const w = await createWorld({ config: { stations: `${AMSTERDAM}, nl10938` } });
   const ack = await w.gladys.fake.action('check_stations', {});
   assert.equal(ack.success, true, ack.error);
   assert.equal(
@@ -66,9 +66,25 @@ test('check the stations: LKI, components, age, and the typos', async () => {
     [
       'NL49014 Amsterdam-Vondelpark: Moderate (LKI 4), PM2.5, PM10, NO₂, O₃, NO, CO (20 min ago)',
       'NL10938 Groningen-Nijensteinheerd: Moderate (LKI 4), PM2.5, PM10, NO₂, O₃, NO (20 min ago)',
+    ].join('\n'),
+  );
+});
+
+test('a typo or one station failing: the whole report, as a failure', async () => {
+  const w = await createWorld({ config: { stations: `${AMSTERDAM}, abc` } });
+  let ack = await w.gladys.fake.action('check_stations', {});
+  assert.equal(ack.success, false);
+  assert.equal(
+    ack.error.en,
+    [
+      'NL49014 Amsterdam-Vondelpark: Moderate (LKI 4), PM2.5, PM10, NO₂, O₃, NO, CO (20 min ago)',
       'Ignored, not station numbers: abc',
     ].join('\n'),
   );
+  const two = await createWorld({ config: { stations: `${AMSTERDAM}, NL99999` } });
+  ack = await two.gladys.fake.action('check_stations', {});
+  assert.equal(ack.success, false);
+  assert.match(ack.error.fr, /NL99999 : pas une station Luchtmeetnet/);
 });
 
 test('check with nothing configured, or nothing answering: a failure', async () => {

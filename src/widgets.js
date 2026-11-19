@@ -80,7 +80,12 @@ export function buildAirQualityContent({ hub, gladys, settings = {}, language = 
       };
     }
     const ids = idsOf(gladys, record.id);
-    const tiles = (hidden.has('pollutants') ? [] : pollutantsOf(record))
+    // Only the features the Gladys device has: a component learnt after the
+    // device was added has none until the user clicks "Update".
+    const features = (gladys.devices ?? []).find((d) => d.external_id === ids.device)?.features;
+    const exists = (key) =>
+      !Array.isArray(features) || features.some((f) => f.external_id === ids.feature(key));
+    const tiles = (hidden.has('pollutants') ? [] : pollutantsOf(record).filter(exists))
       .slice(0, MAX_TILES)
       .map((key) => ({ type: 'value', label: FORMULAS[key], device_feature: ids.feature(key) }));
     const minutes = hub.ageMinutes(record);

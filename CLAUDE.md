@@ -272,7 +272,7 @@ long, et sur un « Sie »/« Ihr… » de politesse en allemand. Le store exige 
 
 - **API** `https://api.luchtmeetnet.nl/open_api` (doc Postman : `api-docs.luchtmeetnet.nl`), ouverte,
   sans clé, **100 requêtes par 5 minutes** : `src/api.js` passe tout par un limiteur à fenêtre glissante
-  (90 / 5 min) et suspend une minute après un 429. Pages de taille variable (au moins 64 éléments),
+  (90 / 5 min) et suspend 5 minutes (une fenêtre) après un 429. Pages de taille variable (au moins 64 éléments),
   `pagination.last_page` suivi ; une page au-delà de la dernière répond `last_page: 0` et `data: []`.
 - **`/measurements` et `/lki` sans `start`/`end`** répondent un **302** vers `iq.luchtmeetnet.nl` avec
   une fenêtre de 7 jours : toujours donner la fenêtre (3 h pour les mesures, 6 h pour le LKI, format

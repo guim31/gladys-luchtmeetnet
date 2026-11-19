@@ -102,7 +102,7 @@ test('station numbers: two letters and digits, upper case', () => {
   assert.equal(normalizeStationId('NL49014; DROP'), null);
 });
 
-test('the limiter keeps under 90 requests per 5 minutes, and pauses after a 429', async () => {
+test('the limiter keeps under 90 requests per 5 minutes, and pauses 5 minutes after a 429', async () => {
   let now = 0;
   const waits = [];
   const limiter = createLimiter({
@@ -121,5 +121,5 @@ test('the limiter keeps under 90 requests per 5 minutes, and pauses after a 429'
   assert.deepEqual(waits, [300_000 - 9_000], 'until the first request leaves the window');
   limiter.backOff();
   await limiter.take();
-  assert.equal(waits.at(-1), 60_000);
+  assert.equal(waits.at(-1), 300_000, 'a whole window of the API');
 });

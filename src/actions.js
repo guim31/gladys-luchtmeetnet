@@ -96,8 +96,11 @@ export async function checkStations(hub, poller, config) {
   const report = Object.fromEntries(
     Object.keys(lines[0]).map((lang) => [lang, lines.map((line) => line[lang]).join('\n')]),
   );
-  // Not one station answered: a failure (red), with the reasons.
-  if (ids.every((id) => hub.lastResults.get(id)?.ok !== true)) {
+  // A station that did not answer, or a typo: a failure (red), with the report.
+  if (
+    ids.some((id) => hub.lastResults.get(id)?.ok !== true) ||
+    config.invalidStationIds.length > 0
+  ) {
     throw new ActionFailure(report);
   }
   return report;

@@ -60,7 +60,7 @@ requests per 5 minutes, fair use. The integration:
   after the other: its LKI and its measurements of the last hours (one page
   each in practice), and its sheet once a day;
 - sends every request through a limiter that keeps under 90 requests per 5
-  minutes, and pauses for a minute after a 429;
+  minutes, and pauses for 5 minutes after a 429;
 - reads only the stations whose device was added to Gladys (and, once, the
   ones it does not know yet, to list them in the Discovery tab);
 - reads the full station list (5 pages) only for **Find a station**, once a day

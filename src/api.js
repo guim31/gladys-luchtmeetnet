@@ -22,8 +22,8 @@ const USER_AGENT = 'gladys-luchtmeetnet (+https://github.com/guim31/gladys-lucht
 export const RATE_MAX = 90;
 export const RATE_WINDOW_MS = 5 * 60_000;
 
-/** After a 429, no request for this long. */
-const BACKOFF_MS = 60_000;
+/** After a 429, no request for a whole window of the API. */
+const BACKOFF_MS = RATE_WINDOW_MS;
 
 /** Hours of measurements asked: the last hour is sometimes published late. */
 const MEASUREMENT_HOURS = 3;
@@ -31,7 +31,7 @@ const MEASUREMENT_HOURS = 3;
 /** Hours of LKI asked. */
 const LKI_HOURS = 6;
 
-/** Pages read at most for one list (25 items per page). */
+/** Pages read at most for one list (25 to 100 items per page, depending on the list). */
 const MAX_PAGES = 8;
 
 /** The components the integration publishes, by Luchtmeetnet formula. */

@@ -241,12 +241,13 @@ export class Hub {
     this.records.set(id, record);
     try {
       await this.refreshIdentity(record);
+      if (record.unknown) {
+        // A 404 on its sheet: no need to ask for its data (the typo is said by the check).
+        throw Object.assign(new Error('unknown to Luchtmeetnet'), { unknown: true });
+      }
       const before = { level: this.indexOf(record)?.level ?? null, values: this.valuesOf(record) };
       const lki = await fetchLki(id, this.deps);
       const latest = await fetchMeasurements(id, this.deps);
-      if (record.unknown && !lki && Object.keys(latest).length === 0) {
-        throw Object.assign(new Error('unknown to Luchtmeetnet'), { unknown: true });
-      }
       const events = [...this.applyValues(record, latest), ...this.applyIndex(record, lki)];
       if (events.length > 0) {
         // Built once the whole hour is applied: the summary is the new one.

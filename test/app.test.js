@@ -241,7 +241,7 @@ test('the status: nothing configured, API down and back', async () => {
   assert.deepEqual(w.gladys.fake.connectionStatus, { connected: true });
 });
 
-test('a 429 from Luchtmeetnet: the status says it, the requests pause a minute', async () => {
+test('a 429 from Luchtmeetnet: the status says it, the requests pause 5 minutes', async () => {
   const w = await createWorld({ config: { stations: AMSTERDAM } });
   await createAll(w);
   w.network.lki[AMSTERDAM] = { status: 429 };
@@ -255,7 +255,7 @@ test('a 429 from Luchtmeetnet: the status says it, the requests pause a minute',
   // Read again at once: the limiter first waits out the minute (test clock).
   const before = w.clock.now;
   await w.app.poller.refreshNow([AMSTERDAM]);
-  assert.ok(w.clock.now - before >= 59_000, 'paused after the 429');
+  assert.ok(w.clock.now - before >= 299_000, 'paused after the 429');
   assert.deepEqual(w.gladys.fake.connectionStatus, { connected: true });
 });
 
@@ -370,4 +370,27 @@ test('a list spread over several pages is read to the last page', async () => {
   assert.equal(pages.length, 8);
   assert.match(pages.at(-1), /&page=8$/);
   assert.equal(w.gladys.fake.lastState(featureId(w, AMSTERDAM, 'pm25')), 5.8);
+});
+
+test('a failed read is tried again 5 minutes later, not a period later', async () => {
+  const w = await createWorld({ config: { stations: AMSTERDAM } });
+  await createAll(w);
+  const reads = () => w.network.calls.filter((call) => call.startsWith('/lki?')).length;
+  w.network.down = true;
+  w.advance(HOUR);
+  await w.app.poller.cycle();
+  const failed = reads();
+  w.network.down = false;
+  w.advance(60_000);
+  await w.app.poller.cycle();
+  assert.equal(reads(), failed, 'not at once');
+  w.advance(4 * 60_000);
+  await w.app.poller.cycle();
+  assert.equal(reads(), failed + 1);
+  assert.deepEqual(w.gladys.fake.connectionStatus, { connected: true });
+});
+
+test('a station unknown to Luchtmeetnet costs one request per read, not three', async () => {
+  const w = await createWorld({ config: { stations: 'NL99999' } });
+  assert.deepEqual(w.network.calls, ['/stations/NL99999']);
 });

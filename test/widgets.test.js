@@ -44,6 +44,16 @@ function assertBound(w, widgetContent) {
   }
 }
 
+/** Every device_feature of a content exists on this device. */
+function assertBoundTo(device, widgetContent) {
+  const known = new Set(device.features.map((f) => f.external_id));
+  for (const component of widgetContent.components) {
+    if (component.device_feature) {
+      assert.ok(known.has(component.device_feature), component.device_feature);
+    }
+  }
+}
+
 test('one station: four pollutant tiles, the level colored, the hour, the source', async () => {
   const w = await world();
   for (const lang of LANGS) {
@@ -66,6 +76,20 @@ test('one station: four pollutant tiles, the level colored, the hour, the source
   });
   assert.equal(status.items[1].value, 'il y a 20 min');
   assert.equal(c.components.at(-1).text, TEXT.source.fr);
+});
+
+test('no tile for a component learnt after the device was added', async () => {
+  const w = await createWorld({ config: { stations: AMSTERDAM } });
+  // Added to Gladys without its PM2.5 feature (an older structure).
+  const device = structuredClone(discovered(w, AMSTERDAM));
+  device.features = device.features.filter((f) => !f.external_id.endsWith(':pm25'));
+  await w.gladys.fake.deviceCreated(device);
+  const c = await content(w, { station: device.external_id }, 'en');
+  assertBoundTo(device, c);
+  assert.deepEqual(
+    c.components.filter((x) => x.type === 'value').map((x) => x.label),
+    ['PM10', 'NO₂', 'O₃', 'NO'],
+  );
 });
 
 test('the optional blocks can be hidden', async () => {

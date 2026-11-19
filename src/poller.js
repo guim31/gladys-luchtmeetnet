@@ -25,6 +25,9 @@ export const TICK_MS = 60_000;
 /** A station read less than this share of its period ago is not read again. */
 const MIN_GAP = 0.9;
 
+/** A failed read is tried again after this long. */
+export const RETRY_MS = 5 * 60_000;
+
 /**
  * @param {object} options
  * @param {object} options.gladys
@@ -84,8 +87,10 @@ export function createPoller({
     try {
       await run;
     } catch (err) {
-      // Logged once by the hub's issue log; the next read retries.
-      logger.debug(`#${id}: ${err.message}`);
+      // Logged once by the hub's issue log. Retried RETRY_MS later, not a
+      // whole period later: the data would go stale meanwhile.
+      lastReadAt.set(id, now() - periodMs(getConfig()) * MIN_GAP + RETRY_MS);
+      logger.debug(`${id}: ${err.message}`);
     } finally {
       inFlight.delete(id);
     }
